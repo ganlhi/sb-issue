@@ -2,7 +2,9 @@
   "name": "@sb-issue/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx run my-components:storybook"
+  },
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.14.5",
@@ -12,11 +14,11 @@
     "@nx/js": "18.0.8",
     "@nx/react": "^18.0.8",
     "@nx/storybook": "18.0.8",
-    "@nx/vite": "18.0.8",
     "@nx/web": "18.0.8",
     "@nx/workspace": "18.0.8",
     "@storybook/addon-essentials": "^7.5.3",
     "@storybook/core-server": "^7.5.3",
+    "@storybook/nextjs": "^7.6.17",
     "@storybook/react-vite": "^7.5.3",
     "@swc-node/register": "~1.8.0",
     "@swc/cli": "~0.1.62",
@@ -37,8 +39,7 @@
     "prettier": "^2.6.2",
     "storybook": "^7.5.3",
     "ts-node": "10.9.1",
-    "typescript": "~5.3.2",
-    "vite": "~5.0.0"
+    "typescript": "~5.3.2"
   },
   "dependencies": {
     "react": "18.2.0",

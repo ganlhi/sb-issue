@@ -4,5 +4,18 @@
   "sourceRoot": "my-components/src",
   "projectType": "library",
   "tags": [],
-  "targets": {}
+  "targets": {
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "my-components/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    }
+  }
 }

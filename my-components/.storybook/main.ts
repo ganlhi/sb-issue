@@ -1,24 +1,35 @@
-import type { StorybookConfig } from '@storybook/react-vite';
-
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import { mergeConfig } from 'vite';
+import type {StorybookConfig} from '@storybook/nextjs';
 
 const config: StorybookConfig = {
   stories: ['../src/lib/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: ['@storybook/addon-essentials'],
   framework: {
-    name: '@storybook/react-vite',
+    name: '@storybook/nextjs',
     options: {},
   },
+  core: {
+    builder: '@storybook/builder-webpack5',
+  },
+  webpackFinal: cfg => {
+    const imageRule = cfg.module?.rules?.find(rule => {
+      const test = (rule as { test: RegExp }).test
 
-  viteFinal: async (config) =>
-    mergeConfig(config, {
-      plugins: [nxViteTsPaths()],
-    }),
+      if (!test) {
+        return false
+      }
+
+      return test.test('.svg')
+    }) as { [key: string]: any }
+
+    imageRule.exclude = /\.svg$/
+
+    cfg.module?.rules?.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack']
+    })
+
+    return cfg
+  }
 };
 
 export default config;
-
-// To customize your Vite configuration you can use the viteFinal field.
-// Check https://storybook.js.org/docs/react/builders/vite#configuration
-// and https://nx.dev/recipes/storybook/custom-builder-configs
